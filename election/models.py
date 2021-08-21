@@ -16,16 +16,16 @@ class Election(database.Model):
     __tablename__ = "elections"
 
     id = database.Column(database.Integer, primary_key=True)
-    start_datetime = database.Column(database.DATETIME, nullable=False, unique=True)
-    end_datetime = database.Column(database.DATETIME, nullable=False, unique=True)
-    type = database.Column(database.String(256), nullable=False)
+    start = database.Column(database.DATETIME, nullable=False, unique=True)
+    end = database.Column(database.DATETIME, nullable=False, unique=True)
+    individual = database.Column(database.String(256), nullable=False)
 
     participants = database.relationship("Participant", secondary=ElectionParticipant.__table__,
                                          back_populates="elections")
     votes = database.relationship("Vote", back_populates="elections")
 
     def __repr__(self):
-        return "(Election_id:{}; {}-{}; type: {})".format(self.id, self.start_datetime, self.end_datetime, self.type)
+        return "(Election_id:{}; {}-{}; type: {})".format(self.id, self.start, self.end, self.individual)
 
 
 class Participant(database.Model):
@@ -33,7 +33,7 @@ class Participant(database.Model):
 
     id = database.Column(database.Integer, primary_key=True)
     name = database.Column(database.String(256), nullable=False)
-    type = database.Column(database.String(256), nullable=False)
+    individual = database.Column(database.BOOLEAN, nullable=False)
 
     elections = database.relationship("Election", secondary=ElectionParticipant.__table__,
                                       back_populates="patricipants")
@@ -46,7 +46,17 @@ class Participant(database.Model):
 class Vote(database.Model):
     __tablename__ = "votes"
 
-    id = database.Column(database.Integer, primary_key=True)
+    guid = database.Column(database.Integer, primary_key=True)
     electionId = database.Column(database.Integer, database.ForeignKey("elections.id"), nullable=False)
     participantId = database.Column(database.Integer, database.ForeignKey("participants.id"), nullable=False)
     officialsJmbg = database.Column(database.String, nullable=False)
+
+
+class InvalidVote(database.Model):
+    __tablename__ = "invalidvotes"
+
+    guid = database.Column(database.Integer, primary_key=True)
+    electionId = database.Column(database.Integer, database.ForeignKey("elections.id"), nullable=False)
+    pollNumber = database.Column(database.Integer, nullable=False)
+    officialsJmbg = database.Column(database.String, nullable=False)
+    reason = database.Column(database.String(256), nullable=False)

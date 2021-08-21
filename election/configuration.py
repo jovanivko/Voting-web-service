@@ -1,10 +1,13 @@
-from datetime import timedelta;
-import os;
+from datetime import timedelta
+import os
 
-databaseUrl = os.environ["DATABASE_URL"];
+databaseUrl = os.environ["DATABASE_URL"]
 
 class Configuration ( ):
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://root:root@{databaseUrl}/election";
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://root:root@{databaseUrl}/election"
+    REDIS_HOST = "localhost"
+    REDIS_VOTES_LIST = "votes"
+    REDIS_MESSAGE_CHANNEL = "notification"
     JWT_SECRET_KEY = "JWT_SECRET_KEY"
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta ( minutes = 60 );
-    JWT_REFRESH_TOKEN_EXPIRES = timedelta ( days = 30 );
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta ( minutes = 60 )
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta ( days = 30 )
