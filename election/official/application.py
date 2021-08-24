@@ -3,10 +3,10 @@ import io
 import re
 
 from flask import Flask, request, Response, jsonify
-from ..configuration import Configuration
+from election.configuration import Configuration
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt
 from redis import Redis;
-from ..admin.decorator import role_check
+from election.admin.decorator import role_check
 
 application = Flask(__name__)
 application.config.from_object(Configuration)

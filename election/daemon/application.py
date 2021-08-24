@@ -1,7 +1,7 @@
 from _datetime import datetime
 
-from ..configuration import Configuration
-from ..models import database, Vote, InvalidVote, Election
+from election.configuration import Configuration
+from election.models import database, Vote, InvalidVote, Election
 from redis import Redis
 from sqlalchemy import and_
 
@@ -32,7 +32,7 @@ with Redis(host=Configuration.REDIS_HOST) as redis:
                 database.session.add(invalidvote)
                 database.session.commit()
             else:
-                participantid = participants[vote[1]].id
-                _Vote = Vote(participantId=participantid, electionId=election.id, officialsJmbg=jmbg, guid=vote[0])
+                pollNumber = participants[vote[1]].pollNumber
+                _Vote = Vote(participantId=pollNumber, electionId=election.id, officialsJmbg=jmbg, guid=vote[0])
                 database.session.add(_Vote)
                 database.session.commit()

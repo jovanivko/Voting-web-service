@@ -18,14 +18,21 @@ class Election(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     start = database.Column(database.DATETIME, nullable=False, unique=True)
     end = database.Column(database.DATETIME, nullable=False, unique=True)
-    individual = database.Column(database.String(256), nullable=False)
+    individual = database.Column(database.BOOLEAN, nullable=False)
 
     participants = database.relationship("Participant", secondary=ElectionParticipant.__table__,
                                          back_populates="elections")
     votes = database.relationship("Vote", back_populates="elections")
 
     def __repr__(self):
-        return "(Election_id:{}; {}-{}; type: {})".format(self.id, self.start, self.end, self.individual)
+        return "{\n id: {},\n start: {},\n end: {},\n individual: {},\n participants: {}}".format(self.id,
+                                                                                                  str(self.start),
+                                                                                                  str(self.end),
+                                                                                                  str(self.individual),
+                                                                                                  [
+                                                                                                      participant.__repr__()
+                                                                                                      for participant in
+                                                                                                      self.participants])
 
 
 class Participant(database.Model):
@@ -40,7 +47,7 @@ class Participant(database.Model):
     votes = database.relationship("Vote", back_populates="patricipants")
 
     def __repr__(self):
-        return "{} ({})".format(self.name, self.type)
+        return "{\n id: {}, \n name: {}\n}".format(self.id, self.name)
 
 
 class Vote(database.Model):
@@ -48,8 +55,8 @@ class Vote(database.Model):
 
     guid = database.Column(database.Integer, primary_key=True)
     electionId = database.Column(database.Integer, database.ForeignKey("elections.id"), nullable=False)
-    participantId = database.Column(database.Integer, database.ForeignKey("participants.id"), nullable=False)
-    officialsJmbg = database.Column(database.String, nullable=False)
+    pollNumber = database.Column(database.Integer, database.ForeignKey("participants.id"), nullable=False)
+    officialsJmbg = database.Column(database.String(13), nullable=False)
 
 
 class InvalidVote(database.Model):
@@ -58,5 +65,9 @@ class InvalidVote(database.Model):
     guid = database.Column(database.Integer, primary_key=True)
     electionId = database.Column(database.Integer, database.ForeignKey("elections.id"), nullable=False)
     pollNumber = database.Column(database.Integer, nullable=False)
-    officialsJmbg = database.Column(database.String, nullable=False)
+    officialsJmbg = database.Column(database.String(13), nullable=False)
     reason = database.Column(database.String(256), nullable=False)
+
+    def __repr__(self):
+        return "{\n electionOfficialJmbg: {}, \n ballotGuid: {}\n pollNumber: {}\n reason: {}\n}".format(
+            self.officialsJmbg, self.guid, self.pollNumber, self.reason)
