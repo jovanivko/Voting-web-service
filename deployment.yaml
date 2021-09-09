@@ -1,0 +1,140 @@
+version: '3'
+
+services:
+  authenticationDB:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+    ports:
+      - '3306:3306'
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+    - authdbdata:/var/lib/mysql
+    networks:
+      - authenticationNetwork
+  authenticationDBMigration:
+    image: authenticationdbmigration
+    environment:
+      - DATABASE_URL=authenticationDB
+    depends_on:
+      authenticationDB:
+        condition: service_healthy
+    networks:
+      - authenticationNetwork
+  authentication:
+    image: authentication
+    environment:
+      - DATABASE_URL=authenticationDB
+    depends_on:
+      - authenticationDBMigration
+    ports:
+      - '5000:5000'
+    networks:
+      - authenticationNetwork
+  electionDB:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 10
+    ports:
+      - '3307:3307'
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - elecdbdata:/var/lib/mysql
+    networks:
+      - electionNetwork
+      - adminNetwork
+  electionDBMigration:
+    image: electiondbmigration
+    environment:
+      - DATABASE_URL=electionDB
+    depends_on:
+      electionDB:
+        condition: service_healthy
+    networks:
+      - electionNetwork
+  administrator:
+    image: administrator
+    environment:
+      - DATABASE_URL=electionDB
+    depends_on:
+      - electionDBMigration
+    ports:
+      - '5001:5001'
+    networks:
+      - adminNetwork
+  daemon:
+    image: deamon
+    environment:
+      - DATABASE_URL=electionDB
+      - REDIS_URI=redis
+    depends_on:
+      - electionDBMigration
+    networks:
+      - electionNetwork
+      - redisNetwork
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+    networks:
+      - voteNetwork
+      - redisNetwork
+  official:
+    image: official
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URI=redis
+    deploy:
+      replicas: 3
+    ports:
+      - '5002:5002'
+    networks:
+      - voteNetwork
+  elecphpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - '8081:80'
+    environment:
+      PMA_HOST: electionDB
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - electionNetwork
+  authphpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: authenticationDB
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - authenticationNetwork
+
+volumes:
+  elecdbdata:
+  authdbdata:
+
+
+networks:
+  adminNetwork:
+    #driver: overlay
+  authenticationNetwork:
+    #driver: overlay
+  electionNetwork:
+    #driver: overlay
+  voteNetwork:
+    #river: overlay
+  redisNetwork:
+    #driver: overlay

@@ -2,11 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee005e4b-b741-4cf8-bb64-d75ddb6adab2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/administrator.dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication.dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/ts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authenticationDBMigration.dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/daemon.dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/electionDBMigration.dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/official.dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/admin/decorator.py" beforeDir="false" afterPath="$PROJECT_DIR$/authentication/decorator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/authentication/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/authentication.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/configuration.py" beforeDir="false" afterPath="$PROJECT_DIR$/authentication/configuration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/migrate.py" beforeDir="false" afterPath="$PROJECT_DIR$/authentication/migrate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/migrations/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/migrations/alembic.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/migrations/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/migrations/script.py.mako" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/election/admin/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/election/admin/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/admin/decorator.py" beforeDir="false" afterPath="$PROJECT_DIR$/election/decorator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/configuration.py" beforeDir="false" afterPath="$PROJECT_DIR$/election/configuration.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/election/daemon/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/election/daemon/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/election.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/migrate.py" beforeDir="false" afterPath="$PROJECT_DIR$/election/migrate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/migrations/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/migrations/alembic.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/migrations/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/migrations/script.py.mako" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/migrations/versions/c7fde3086b90_production_migration.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/election/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/election/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/election/official/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/election/official/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/election/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/election/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +47,30 @@
       </list>
     </option>
   </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1wzuRLUCG5DP2aKCszxR6gYIzde" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -35,15 +84,23 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/election/migrate.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/main.py" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jovan\Desktop\IEP\IEP\election\admin" />
       <recent name="C:\Users\jovan\Desktop\IEP\IEP\election" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jovanivko\Desktop\IEP\IEP" />
+      <recent name="C:\Users\jovanivko\Desktop\IEP\IEP\authentication" />
+      <recent name="C:\Users\jovanivko\Desktop\IEP\IEP\election" />
+      <recent name="C:\Users\jovanivko\Desktop\IEP\IEP\tests" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.deamon">
+  <component name="RunManager" selected="Python.test">
     <configuration name="admin" type="PythonConfigurationType" factoryName="Python">
       <module name="IEP" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -59,6 +116,29 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/election/admin/application.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="authentication" type="PythonConfigurationType" factoryName="Python">
+      <module name="IEP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DATABASE_URL" value="localhost:3306" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\jovanivko\Desktop\IEP\IEP\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/authentication" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/authentication/application.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -90,7 +170,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="migrate" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="migrate_elect" type="PythonConfigurationType" factoryName="Python">
       <module name="IEP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -136,26 +216,118 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="election/election.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python">
+      <module name="IEP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\jovanivko\Desktop\IEP\IEP\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/main.py" />
+      <option name="PARAMETERS" value="--type all --authentication-address http://127.0.0.1:5000 --jwt-secret JWTSecretDevKey --roles-field roles --administrator-role administrator --user-role user --administrator-address http://127.0.0.1:5001 --station-address http://127.0.0.1:5002 --with-authentication" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="administrator" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="administrator" />
+          <option name="buildOnly" value="true" />
+          <option name="containerName" value="" />
+          <option name="sourceFilePath" value="administrator.dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="authentication" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="authentication" />
+          <option name="buildOnly" value="true" />
+          <option name="containerName" value="" />
+          <option name="sourceFilePath" value="authentication.dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="authenticationDBMigration" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="authenticationdbmigration" />
+          <option name="buildOnly" value="true" />
+          <option name="containerName" value="" />
+          <option name="sourceFilePath" value="authenticationDBMigration.dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="deamon" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="deamon" />
+          <option name="buildOnly" value="true" />
+          <option name="containerName" value="" />
+          <option name="sourceFilePath" value="daemon.dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="deployment.yaml" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
-          <option name="sourceFilePath" value="election/election.yaml" />
+          <option name="envFilePath" value="" />
+          <option name="sourceFilePath" value="deployment.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="electionDBMigration" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="electiondbmigration" />
+          <option name="buildOnly" value="true" />
+          <option name="containerName" value="" />
+          <option name="sourceFilePath" value="electionDBMigration.dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="official" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="official" />
+          <option name="buildOnly" value="true" />
+          <option name="containerName" value="" />
+          <option name="sourceFilePath" value="official.dockerfile" />
         </settings>
       </deployment>
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Docker.election/election.yaml: Compose Deployment" />
+      <item itemvalue="Docker.deamon" />
+      <item itemvalue="Docker.authentication" />
+      <item itemvalue="Docker.authenticationDBMigration" />
+      <item itemvalue="Docker.electionDBMigration" />
+      <item itemvalue="Docker.official" />
+      <item itemvalue="Docker.deployment.yaml" />
+      <item itemvalue="Docker.administrator" />
+      <item itemvalue="Python.test" />
       <item itemvalue="Python.admin" />
       <item itemvalue="Python.official" />
-      <item itemvalue="Python.migrate" />
+      <item itemvalue="Python.migrate_elect" />
       <item itemvalue="Python.deamon" />
+      <item itemvalue="Python.authentication" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Docker.election/election.yaml: Compose Deployment" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -166,7 +338,11 @@
       <option name="presentableId" value="Default" />
       <updated>1629473729635</updated>
       <workItem from="1629473733302" duration="2414000" />
-      <workItem from="1629720192812" duration="9207000" />
+      <workItem from="1629720192812" duration="12379000" />
+      <workItem from="1630886357638" duration="59775000" />
+      <workItem from="1631150783319" duration="702000" />
+      <workItem from="1631197401496" duration="4162000" />
+      <workItem from="1631201582348" duration="8554000" />
     </task>
     <servers />
   </component>
@@ -186,13 +362,19 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/IEP$admin.coverage" NAME="admin Coverage Results" MODIFIED="1629811341862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/election/admin" />
+    <SUITE FILE_PATH="coverage/IEP$migrate_elect.coverage" NAME="migrate_elect Coverage Results" MODIFIED="1630980314452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/election" />
+    <SUITE FILE_PATH="coverage/IEP$migrate__1_.coverage" NAME="migrate_auth Coverage Results" MODIFIED="1630945912228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/authentication" />
+    <SUITE FILE_PATH="coverage/IEP$migrate.coverage" NAME="migrate Coverage Results" MODIFIED="1629811253288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/election" />
+    <SUITE FILE_PATH="coverage/IEP$official.coverage" NAME="official Coverage Results" MODIFIED="1630961138313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/election/official" />
+    <SUITE FILE_PATH="coverage/IEP$admin.coverage" NAME="admin Coverage Results" MODIFIED="1630977789577" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/election/admin" />
+    <SUITE FILE_PATH="coverage/IEP$ts.coverage" NAME="ts Coverage Results" MODIFIED="1630954918565" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/authentication" />
+    <SUITE FILE_PATH="coverage/IEP$deamon.coverage" NAME="deamon Coverage Results" MODIFIED="1630977816155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/election/daemon" />
     <SUITE FILE_PATH="coverage/IEP$models.coverage" NAME="models Coverage Results" MODIFIED="1629384557091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/authorization" />
-    <SUITE FILE_PATH="coverage/IEP$authentication.coverage" NAME="authentication Coverage Results" MODIFIED="1629423175080" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/authentication" />
+    <SUITE FILE_PATH="coverage/IEP$authentication.coverage" NAME="authentication Coverage Results" MODIFIED="1630961145323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/authentication" />
+    <SUITE FILE_PATH="coverage/IEP$authenticationTests.coverage" NAME="authenticationTests Coverage Results" MODIFIED="1630888614659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/IEP$test.coverage" NAME="test Coverage Results" MODIFIED="1631209935405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/IEP$authorization.coverage" NAME="authorization Coverage Results" MODIFIED="1629405288639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/authorization" />
     <SUITE FILE_PATH="coverage/IEP$d.coverage" NAME="d Coverage Results" MODIFIED="1629419624781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/authentication" />
-    <SUITE FILE_PATH="coverage/IEP$migrate.coverage" NAME="migrate Coverage Results" MODIFIED="1629811253288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/election" />
-    <SUITE FILE_PATH="coverage/IEP$main.coverage" NAME="main Coverage Results" MODIFIED="1629726503300" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/election" />
-    <SUITE FILE_PATH="coverage/IEP$official.coverage" NAME="official Coverage Results" MODIFIED="1629811529984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/election/official" />
+    <SUITE FILE_PATH="coverage/IEP$main.coverage" NAME="main Coverage Results" MODIFIED="1630981965282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

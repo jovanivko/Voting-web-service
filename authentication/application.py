@@ -3,11 +3,10 @@ import re
 from flask import Flask, request, Response, jsonify
 from configuration import Configuration
 from models import database, User, UserRole
-from email.utils import parseaddr
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, create_refresh_token, get_jwt, \
     get_jwt_identity
 from sqlalchemy import and_
-from admin.decorator import role_check
+from decorator import role_check
 
 application = Flask(__name__)
 application.config.from_object(Configuration)
@@ -40,25 +39,31 @@ def register():
     if passwordEmpty:
         return jsonify(message="Field password is missing."), 400
 
-    m = 11 - ((7 * (int(jmbg[0]) + int(jmbg[6])) + 6 * (int(jmbg[1]) + int(jmbg[7])) + 5 * (
-            int(jmbg[2]) + int(jmbg[8])) + 4 * (int(jmbg[3]) + int(jmbg[9])) + 3 * (
-                       int(jmbg[4]) + int(jmbg[10])) + 2 * (int(jmbg[5]) + int(jmbg[11]))) % 11)
-    if m >= 10:
-        m = 0
+    m = -1
 
-    if (len(jmbg) != 13 or ((re.compile('^[0-9]{13}$')).fullmatch(jmbg) is None) or (int(jmbg[0:2]) not in range(1, 32)) or (int(jmbg[2:4]) not in range(1, 13)) or (int(jmbg[4:7]) not in range(0, 1000)) or (int(jmbg[7:9]) not in range(70, 100)) or (int(jmbg[9:12]) not in range(0, 1000)) or (int(jmbg[-1]) != m)):
+    if len(jmbg) == 13:
+        m = 11 - ((7 * (int(jmbg[0]) + int(jmbg[6])) + 6 * (int(jmbg[1]) + int(jmbg[7])) + 5 * (
+                int(jmbg[2]) + int(jmbg[8])) + 4 * (int(jmbg[3]) + int(jmbg[9])) + 3 * (
+                           int(jmbg[4]) + int(jmbg[10])) + 2 * (int(jmbg[5]) + int(jmbg[11]))) % 11)
+        if m >= 10:
+            m = 0
+
+    if (len(jmbg) != 13 or ((re.compile('^[0-9]{13}$')).fullmatch(jmbg) is None) or (
+            int(jmbg[0:2]) not in range(1, 32)) or (int(jmbg[2:4]) not in range(1, 13)) or (
+            int(jmbg[4:7]) not in range(0, 1000)) or (int(jmbg[7:9]) not in range(70, 100)) or (
+            int(jmbg[9:12]) not in range(0, 1000)) or (int(jmbg[-1]) != m)):
         return jsonify(message="Invalid jmbg."), 400
 
-    result = parseaddr(email)
-    if len(result[1]) == 0:
+    if not re.fullmatch(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', email):
         return jsonify(message="Invalid email."), 400
 
-    if (len(password) < 8 or ((re.compile('[0-9]+')).search(password) is None) or ((re.compile('[a-z]+')).search(password) is None) or ((re.compile('[A-Z]+')).search(password) is None)):
+    if (len(password) < 8 or ((re.compile('[0-9]+')).search(password) is None) or (
+            (re.compile('[a-z]+')).search(password) is None) or ((re.compile('[A-Z]+')).search(password) is None) or len(password)>256):
         return jsonify(message="Invalid password."), 400
 
     user = User.query.filter(User.email == email).first();
     if user:
-        return jsonify(message="Email already exists"), 400
+        return jsonify(message="Email already exists."), 400
 
     user = User(jmbg=jmbg, email=email, forename=forename, surname=surname, password=password)
     database.session.add(user)
@@ -80,13 +85,12 @@ def login():
     passwordEmpty = len(password) == 0;
 
     if emailEmpty:
-        return jsonify(message="Field email is missing"), 400
+        return jsonify(message="Field email is missing."), 400
 
     if passwordEmpty:
-        return jsonify(message="Field password is missing"), 400
+        return jsonify(message="Field password is missing."), 400
 
-    result = parseaddr(email)
-    if len(result[1]) == 0:
+    if not re.fullmatch(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', email):
         return jsonify(message="Invalid email."), 400
 
     user = User.query.filter(and_(User.email == email, User.password == password)).first();
@@ -114,25 +118,24 @@ def refresh():
     refreshClaims = get_jwt();
 
     additionalClaims = {
-        "jmbg": refreshClaims.jmbg,
+        "jmbg": refreshClaims["jmbg"],
         "forename": refreshClaims["forename"],
         "surname": refreshClaims["surname"],
         "roles": refreshClaims["roles"]
     };
 
-    return Response(create_access_token(identity=identity, additional_claims=additionalClaims), status=200);
+    return jsonify(accessToken=create_access_token(identity=identity, additional_claims=additionalClaims));
 
 
 @application.route("/delete", methods=["POST"])
 @jwt_required()
-@role_check(role= "admin")
+@role_check(role="administrator")
 def delete():
     email = request.json.get("email", "");
     if len(email) == 0:
         return jsonify(message="Field email is missing."), 400
 
-    result = parseaddr(email)
-    if (len(result[1]) == 0):
+    if not re.fullmatch(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', email):
         return jsonify(message="Invalid email."), 400
 
     user = User.query.filter(User.email == email).first()
@@ -153,7 +156,7 @@ def delete():
 
 @application.route("/", methods=["GET"])
 def index():
-    return "Hello world!";
+    return "Authorization service up!";
 
 
 if (__name__ == "__main__"):

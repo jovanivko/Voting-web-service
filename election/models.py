@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from authentication.models import User
+from ast import literal_eval
 
 database = SQLAlchemy()
 
@@ -22,52 +22,61 @@ class Election(database.Model):
 
     participants = database.relationship("Participant", secondary=ElectionParticipant.__table__,
                                          back_populates="elections")
-    votes = database.relationship("Vote", back_populates="elections")
+    votes = database.relationship("Vote")
 
     def __repr__(self):
-        return "{\n id: {},\n start: {},\n end: {},\n individual: {},\n participants: {}}".format(self.id,
-                                                                                                  str(self.start),
-                                                                                                  str(self.end),
-                                                                                                  str(self.individual),
-                                                                                                  [
-                                                                                                      participant.__repr__()
-                                                                                                      for participant in
-                                                                                                      self.participants])
+        return "{{'id': {}, 'start': '{}', 'end': '{}', 'individual': {}, 'participants': {}}}".format(self.id,
+                                                                                                       self.start,
+                                                                                                       self.end,
+                                                                                                       str(self.individual),
+                                                                                                       [
+                                                                                                           dict(id=
+                                                                                                                participant.id,
+                                                                                                                name=
+                                                                                                                participant.name)
+                                                                                                           for
+                                                                                                           participant
+                                                                                                           in
+                                                                                                           self.participants])
 
 
 class Participant(database.Model):
     __tablename__ = "participants"
 
-    id = database.Column(database.Integer, primary_key=True)
     name = database.Column(database.String(256), nullable=False)
     individual = database.Column(database.BOOLEAN, nullable=False)
+    id = database.Column(database.Integer, primary_key=True)
 
     elections = database.relationship("Election", secondary=ElectionParticipant.__table__,
-                                      back_populates="patricipants")
-    votes = database.relationship("Vote", back_populates="patricipants")
+                                      back_populates="participants")
 
     def __repr__(self):
-        return "{\n id: {}, \n name: {}\n}".format(self.id, self.name)
+        dict = {};
+        dict["name"] = self.name
+        dict["individual"] = self.individual
+        dict["id"] = self.id
+        return str(dict)
 
 
 class Vote(database.Model):
     __tablename__ = "votes"
 
-    guid = database.Column(database.Integer, primary_key=True)
+    guid = database.Column(database.String(40), primary_key=True)
     electionId = database.Column(database.Integer, database.ForeignKey("elections.id"), nullable=False)
-    pollNumber = database.Column(database.Integer, database.ForeignKey("participants.id"), nullable=False)
+    pollNumber = database.Column(database.Integer, nullable=False)
     officialsJmbg = database.Column(database.String(13), nullable=False)
 
 
 class InvalidVote(database.Model):
     __tablename__ = "invalidvotes"
 
-    guid = database.Column(database.Integer, primary_key=True)
+    id = database.Column(database.Integer, primary_key=True)
+    guid = database.Column(database.String(40))
     electionId = database.Column(database.Integer, database.ForeignKey("elections.id"), nullable=False)
     pollNumber = database.Column(database.Integer, nullable=False)
     officialsJmbg = database.Column(database.String(13), nullable=False)
     reason = database.Column(database.String(256), nullable=False)
 
     def __repr__(self):
-        return "{\n electionOfficialJmbg: {}, \n ballotGuid: {}\n pollNumber: {}\n reason: {}\n}".format(
-            self.officialsJmbg, self.guid, self.pollNumber, self.reason)
+        return str(dict(ballotGuid=self.guid, electionOfficialJmbg=self.officialsJmbg, pollNumber=self.pollNumber,
+                        reason=self.reason))

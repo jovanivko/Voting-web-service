@@ -8,13 +8,19 @@ application = Flask(__name__);
 application.config.from_object(Configuration);
 
 migrateObject = Migrate(application, database);
+done = False
 
-if (not database_exists(application.config["SQLALCHEMY_DATABASE_URI"])):
-    create_database(application.config["SQLALCHEMY_DATABASE_URI"]);
+while (not done):
+    try:
+        if (not database_exists(application.config["SQLALCHEMY_DATABASE_URI"])):
+            create_database(application.config["SQLALCHEMY_DATABASE_URI"]);
 
-database.init_app(application);
+        database.init_app(application);
 
-with application.app_context() as context:
-    init();
-    migrate(message="Production migration");
-    upgrade();
+        with application.app_context() as context:
+            init();
+            migrate(message="Production migration");
+            upgrade();
+            done = True
+    except Exception as er:
+        print(er)

@@ -9,38 +9,45 @@ application.config.from_object(Configuration);
 
 migrateObject = Migrate(application, database);
 
-if (not database_exists(application.config["SQLALCHEMY_DATABASE_URI"])):
-    create_database(application.config["SQLALCHEMY_DATABASE_URI"]);
+done = False
 
-database.init_app(application);
+while (not done):
+    try:
+        if (not database_exists(application.config["SQLALCHEMY_DATABASE_URI"])):
+            create_database(application.config["SQLALCHEMY_DATABASE_URI"]);
 
-with application.app_context() as context:
-    init();
-    migrate(message="Production migration");
-    upgrade();
+        database.init_app(application);
 
-    adminRole = Role(name="admin");
-    userRole = Role(name="official");
+        with application.app_context() as context:
+            init();
+            migrate(message="Production migration");
+            upgrade();
 
-    database.session.add(adminRole);
-    database.session.add(userRole);
-    database.session.commit();
+            adminRole = Role(name="administrator");
+            userRole = Role(name="user");
 
-    admin = User(
-        jmbg="0000000000000",
-        email="admin@admin.com",
-        password="1",
-        forename="admin",
-        surname="admin"
-    );
+            database.session.add(adminRole);
+            database.session.add(userRole);
+            database.session.commit();
 
-    database.session.add(admin);
-    database.session.commit();
+            admin = User(
+                jmbg="0000000000000",
+                email="admin@admin.com",
+                password="1",
+                forename="admin",
+                surname="admin"
+            );
 
-    userRole = UserRole(
-        userId=admin.id,
-        roleId=adminRole.id
-    );
+            database.session.add(admin);
+            database.session.commit();
 
-    database.session.add(userRole);
-    database.session.commit();
+            userRole = UserRole(
+                userId=admin.id,
+                roleId=adminRole.id
+            );
+
+            database.session.add(userRole);
+            database.session.commit();
+            done = True
+    except Exception as er:
+        print(er)
